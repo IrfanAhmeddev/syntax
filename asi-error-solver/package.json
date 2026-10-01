@@ -1,0 +1,27 @@
+{
+  "name": "asi-error-solver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@huggingface/transformers": "^4.3.0",
+    "better-sqlite3": "^13.0.3",
+    "express": "^5.2.1",
+    "fuse.js": "^7.5.0",
+    "natural": "^8.1.1",
+    "retriv": "^0.15.0",
+    "sqlite-vec": "^0.1.9",
+    "wink-eng-lite-web-model": "^1.8.1",
+    "wink-nlp": "^2.4.0"
+  },
+  "allowScripts": {
+    "onnxruntime-node@1.30.0": true
+  }
+}

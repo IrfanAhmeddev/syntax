@@ -1,0 +1,77 @@
+/* Tailwind handles layout and colour; this file holds animation and state styles. */
+
+html { color-scheme: light dark; }
+html:not(.dark) { color-scheme: light; }
+
+/* Scrollbars */
+.scroll-thin { scrollbar-width: thin; scrollbar-color: rgba(120, 140, 128, 0.35) transparent; }
+.scroll-thin::-webkit-scrollbar { width: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgba(120, 140, 128, 0.35); border-radius: 8px; }
+
+/* Focus */
+.composer:focus-within { border-color: #48a76a; box-shadow: 0 0 0 4px rgba(72, 167, 106, 0.12); }
+:focus-visible { outline: 2px solid #48a76a; outline-offset: 2px; }
+
+/* Collapsed sidebar (desktop only) */
+@media (min-width: 1024px) {
+  .sidebar.collapsed { width: 4.5rem; }
+  .sidebar.collapsed .label,
+  .sidebar.collapsed #history { display: none; }
+  .sidebar.collapsed #new-chat,
+  .sidebar.collapsed #theme-toggle { justify-content: center; padding-inline: 0; }
+  .sidebar.collapsed > div:first-child { justify-content: center; }
+}
+
+/* Suggestion cards */
+.suggestion {
+  display: flex; align-items: center; gap: 0.85rem; padding: 1rem;
+  border: 1px solid #e5eae6; border-radius: 0.9rem; background: #fff; text-align: left;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.suggestion:hover { transform: translateY(-2px); border-color: #48a76a; box-shadow: 0 8px 24px rgba(36, 124, 75, 0.1); }
+.suggestion strong { display: block; font-size: 0.85rem; font-weight: 600; }
+.suggestion small { display: block; margin-top: 2px; font-size: 0.75rem; color: #7b857e; }
+.chip {
+  display: grid; place-items: center; width: 2.25rem; height: 2.25rem; flex-shrink: 0;
+  border-radius: 0.6rem; background: #eaf5ed; color: #247c4b; font-size: 1.05rem;
+}
+.dark .suggestion { background: #131a16; border-color: rgba(255, 255, 255, 0.1); }
+.dark .chip { background: rgba(72, 167, 106, 0.15); color: #6fcf93; }
+
+/* Entrance animations */
+@keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes bounce-dot { 0%, 80%, 100% { transform: scale(.6); opacity: .4; } 40% { transform: scale(1); opacity: 1; } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+
+.fade-up { animation: fade-up .45s cubic-bezier(.2, .7, .2, 1) both; }
+.welcome-out { animation: fade-up .3s reverse both; }
+
+/* Typewriter caret */
+.typing-caret::after {
+  content: ""; display: inline-block; width: 2px; height: 1.05em; margin-left: 2px;
+  vertical-align: text-bottom; background: #247c4b; animation: blink 1s steps(2) infinite;
+}
+
+/* Thinking dots */
+.dots span {
+  display: inline-block; width: 6px; height: 6px; margin-right: 4px; border-radius: 50%;
+  background: #48a76a; animation: bounce-dot 1.2s infinite ease-in-out;
+}
+.dots span:nth-child(2) { animation-delay: .15s; }
+.dots span:nth-child(3) { animation-delay: .3s; }
+
+/* Shimmering status text */
+.shimmer {
+  background: linear-gradient(90deg, #7b857e 30%, #247c4b 50%, #7b857e 70%);
+  background-size: 200% 100%; -webkit-background-clip: text; background-clip: text;
+  color: transparent; animation: shimmer 1.8s linear infinite;
+}
+
+/* History items */
+.hist-item .hist-del { opacity: 0; transition: opacity .15s; }
+.hist-item:hover .hist-del, .hist-item:focus-within .hist-del { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
